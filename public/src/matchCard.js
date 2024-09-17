@@ -1,5 +1,5 @@
 import { Card } from '../entities/card.js'
-import { canvas, canvas2, faces,  gameState,  getContext, grid, ids } from '../constants/constant.js'
+import { canvas, canvas2, ch, cw, faces,  gameState,  getContext, grid, ids } from '../constants/constant.js'
 import { GameOverlay } from '../overlays/gameOverlay.js'
 
 
@@ -12,8 +12,22 @@ export class Game{
         this.id3 =Math.floor(16777216 * Math.random())
         this.width= this.c.canvas.width
         this.height= this.c.canvas.height 
+        console.log(this.width,this.height)
 
-        this.overlay = new GameOverlay()
+this.cw=this.width/10
+this.ch=this.height/10
+
+        this.baseWidth = 1920
+        this.baseHeight = 1080
+
+        this.ratioWidth = this.width/this.baseWidth
+        this.ratioHeight = this.width/this.baseHeight
+
+        this.overlay = new GameOverlay(this)
+
+        this.cols = 2
+        this.rows = 2
+        this.noCards = 4
        
         
         this.bg = document.querySelector(`#scene1`)
@@ -26,8 +40,16 @@ export class Game{
         this.cards = []
         this.cardsToCheck = []
 
-        for (let i = 0; i < grid.length; i++) {
-            this.cards.push(new Card(grid[i],faces[i])) 
+        for (let i = 0; i < this.noCards; i++) {
+            if(this.cols>0){
+                console.log([2*this.cw+i*2*this.cw+(this.cw*0.5),2*this.ch ])
+                this.cards.push(new Card(this,[2*this.cw+i*2*this.cw+(this.cw*0.5),2*this.ch ],faces[i])) 
+                this.cols--
+            } else{
+                console.log([2*this.cw+(i-2)*2*this.cw+(this.cw*0.5),2*this.ch+this.ch+(0.75*this.ch) ])
+                this.cards.push(new Card(this,[2*this.cw+(i-2)*2*this.cw+(this.cw*0.5),2*this.ch+this.ch+(0.75*this.ch) ],faces[i])) 
+            }
+            
             
         }
 
@@ -50,25 +72,32 @@ export class Game{
              if(id) crd.back = false
             
 if(this.cardsToCheck.length===2){
-    console.log(this.cardsToCheck)
+   
     this.match(this.cardsToCheck[0],this.cardsToCheck[1])
     this.cardsToCheck = []
 }
                  
         })
 
-        canvas2.addEventListener('pointerdown', (e)=>{
-            const mousePos = {
-                x: e.offsetX,
-                y: e.offsetY,
-            }
-            
-        })
-
+     
 
     }
+resize(w,h){
+this.c.canvas.width = w
+this.c.canvas.height = h
+this.width= this.c.canvas.width
+this.height= this.c.canvas.height 
+this.ratioWidth = this.width/this.baseWidth
+        this.ratioHeight = this.height/this.baseHeight
+        console.log(this.width,this.ratioHeight)
+        for (let i = 0; i <this.cards.length; i++) {
+           this.cards[i].resize()
+            
+        }
+}
+
     match(id, id2 ){
-        console.log(id,id2)
+        
         if(id===(id2-10)){  
             console.log('mat')
             this.matched()

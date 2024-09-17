@@ -1,8 +1,8 @@
-import { gameState, nums} from "../constants/constant.js";
+import { ch, cw, gameState, nums} from "../constants/constant.js";
 
 export class GameOverlay{
-    constructor(){
-       
+    constructor(game){
+       this.game = game
         this.image = document.querySelector('#letters');
         this.time = 10
         this.timeTimer = 0
@@ -22,13 +22,13 @@ export class GameOverlay{
         const buffer = ((4*20)-strValue.length*20)
         
         for (let i = 0; i < strValue.length; i++) {
-            this.drawFrame(context, `score-${strValue[i]}`, x+buffer+i*20, 100)
+            this.drawFrame(context, `score-${strValue[i]}`, x+buffer+i*20, this.game.ch*0.5)
             
         }
     }
 
     drawScores(context){
-        this.drawScore(context, gameState.score, 650)
+        this.drawScore(context, gameState.score, 4*this.game.cw)
     }
 
 }

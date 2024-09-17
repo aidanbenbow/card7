@@ -4,6 +4,19 @@ canvas.width = innerWidth;
         canvas.height = innerHeight;
         canvas2.width = innerWidth;
         canvas2.height = innerHeight;
+        console.log(canvas.width,canvas.height)
+
+        export const cw = Math.floor(canvas.width /10)
+        export const ch = Math.floor(canvas.height/10)
+
+        addEventListener('resize', (e)=>{
+            console.log(cw,ch)
+            canvas.width = e.currentTarget.innerWidth;
+        canvas.height = e.currentTarget.innerHeight;
+        canvas2.width = e.currentTarget.innerWidth;
+        canvas2.height = e.currentTarget.innerHeight;
+         })
+ 
 
 const canvasProps = {
     width: innerWidth,
