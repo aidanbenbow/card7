@@ -1,6 +1,7 @@
 import { Card } from '../entities/card.js'
-import { canvas, canvas2, ch, cw, faces,  gameState,  getContext, grid, ids } from '../constants/constant.js'
+import { canvas, canvas2, ch, cw, faces,  gameState,  getContext, grid, ids, pairs } from '../constants/constant.js'
 import { GameOverlay } from '../overlays/gameOverlay.js'
+import { Cheese } from '../entities/cheese.js'
 
 
 export class Game{
@@ -12,22 +13,16 @@ export class Game{
         this.id3 =Math.floor(16777216 * Math.random())
         this.width= this.c.canvas.width
         this.height= this.c.canvas.height 
-        console.log(this.width,this.height)
+        
 
 this.cw=this.width/10
 this.ch=this.height/10
 
-        this.baseWidth = 1920
-        this.baseHeight = 1080
-
-        this.ratioWidth = this.width/this.baseWidth
-        this.ratioHeight = this.width/this.baseHeight
-
         this.overlay = new GameOverlay(this)
 
-        this.cols = 2
-        this.rows = 2
-        this.noCards = 4
+        this.cols = 3
+        this.rows = 4
+        this.noCards = 0
        
         
         this.bg = document.querySelector(`#scene1`)
@@ -40,21 +35,15 @@ this.ch=this.height/10
         this.cards = []
         this.cardsToCheck = []
 
-        for (let i = 0; i < this.noCards; i++) {
-            if(this.cols>0){
-                console.log([2*this.cw+i*2*this.cw+(this.cw*0.5),2*this.ch ])
-                this.cards.push(new Card(this,[2*this.cw+i*2*this.cw+(this.cw*0.5),2*this.ch ],faces[i])) 
-                this.cols--
-            } else{
-                console.log([2*this.cw+(i-2)*2*this.cw+(this.cw*0.5),2*this.ch+this.ch+(0.75*this.ch) ])
-                this.cards.push(new Card(this,[2*this.cw+(i-2)*2*this.cw+(this.cw*0.5),2*this.ch+this.ch+(0.75*this.ch) ],faces[i])) 
+        for (let rows = 0; rows < this.rows; rows++) {
+            for (let cols = 0; cols < this.cols; cols++) {
+                
+                this.cards.push(new Cheese(this,[10,50],faces[this.noCards])) 
+                this.noCards++
             }
-            
             
         }
 
-        
-       
         canvas.addEventListener('pointerdown', (e)=>{
             const mousePos = {
                 x: e.offsetX,
@@ -70,8 +59,8 @@ this.ch=this.height/10
                 let crd = this.cards.find((elem)=>elem.id === id)
                 
              if(id) crd.back = false
-            
-if(this.cardsToCheck.length===2){
+             console.log(crd.matched)
+if(this.cardsToCheck.length===2 ){
    
     this.match(this.cardsToCheck[0],this.cardsToCheck[1])
     this.cardsToCheck = []
@@ -82,25 +71,13 @@ if(this.cardsToCheck.length===2){
      
 
     }
-resize(w,h){
-this.c.canvas.width = w
-this.c.canvas.height = h
-this.width= this.c.canvas.width
-this.height= this.c.canvas.height 
-this.ratioWidth = this.width/this.baseWidth
-        this.ratioHeight = this.height/this.baseHeight
-        console.log(this.width,this.ratioHeight)
-        for (let i = 0; i <this.cards.length; i++) {
-           this.cards[i].resize()
-            
-        }
-}
 
     match(id, id2 ){
         
-        if(id===(id2-10)){  
+        if(id===(id2-10) || id-10===(id2)){  
             console.log('mat')
-            this.matched()
+            this.matched( id,id2)
+           
         } else{
             setTimeout(()=>{
                 this.noMatch(id,id2)
@@ -111,8 +88,13 @@ this.ratioWidth = this.width/this.baseWidth
       
 }
 
-matched(){
+matched(id,id2){
     gameState.score++
+
+    let crd1 = this.cards.find((elem)=>elem.id === id)
+    let crd2 = this.cards.find((elem)=>elem.id === id2)
+             crd1.matched = true
+             crd2.matched = true
 }
 
 noMatch(id,id2){
@@ -132,14 +114,14 @@ noMatch(id,id2){
         this.c2.fillStyle = `rgb(${red},${green},${blue})`
         this.c2.stokeStyle = `rgb(${red},${green},${blue})`
     }
-    hitRegion(n, c1, c2){
+    hitRegion(n, c){
         this.applyhitRegion(ids[n])
-        this.cards[c1].id = ids[n]
-        this.c2.fillRect(this.cards[c1].x,this.cards[c1].y,this.cards[c1].width,this.cards[c1].height,)
+        this.cards[c[0]].id = ids[n]
+        this.c2.fillRect(this.cards[c[0]].x,this.cards[c[0]].y,this.cards[c[0]].width,this.cards[c[0]].height,)
 
         this.applyhitRegion(ids[n]+10)
-        this.cards[c2].id = ids[n]+10
-        this.c2.fillRect(this.cards[c2].x,this.cards[c2].y,this.cards[c2].width,this.cards[c2].height,)
+        this.cards[c[1]].id = ids[n]+10
+        this.c2.fillRect(this.cards[c[1]].x,this.cards[c[1]].y,this.cards[c[1]].width,this.cards[c[1]].height,)
        
        
     }
@@ -156,8 +138,10 @@ noMatch(id,id2){
             card.draw(this.c)
         }
 
-this.hitRegion(0,0,3)
-this.hitRegion(2,1,2)
+        for (let i = 0; i < pairs.length; i++) {
+            this.hitRegion(i,pairs[i])         
+        }
+
 
 this.overlay.drawScores(this.c)
 
@@ -169,5 +153,32 @@ this.overlay.drawScores(this.c)
     start(){
        
         requestAnimationFrame(this.animate.bind(this)) 
+
+
+        for (let i = 0; i < this.cards.length; i++) {
+            if( this.rows>1){
+            this.rows--
+            this.cards[i].x= this.cw*0.2 + i*this.cards[i].width
+            }else if( this.rows<=1 && this.rows>-2 ){
+                
+                this.rows--
+                this.cards[i].x=  this.cards[i-3].x
+                this.cards[i].y= this.ch + this.cards[i].height
+            } else if(this.rows<=-2 && this.rows>-5){
+               
+               this.rows--
+                this.cards[i].x=  this.cards[i-6].x
+                this.cards[i].y= this.ch + this.cards[i].height *2
+            } else if(this.rows<=-5 ){
+                this.cards[i].x=  this.cards[i-9].x
+                this.cards[i].y= this.ch + this.cards[i].height *3
+            }
+            
+            // console.log(this.cards[i].x,this.cards[i].y)
+            // console.log(this.cards[i].height,this.ch)
+            console.log(this.cards)
+            
+        }
+        
 }
 }

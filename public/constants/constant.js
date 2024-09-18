@@ -37,16 +37,25 @@ export const stageProps = {
 export const ids = [
     Math.floor(16777216 * Math.random()),Math.floor(16777216 * Math.random()),
     Math.floor(16777216 * Math.random()),Math.floor(16777216 * Math.random()),
+    Math.floor(16777216 * Math.random()),Math.floor(16777216 * Math.random()),
 ]
 
 export const grid = [
-    [50,50],[50+10+274,50],
-    [50,50+10+374],[50+10+274,50+10+374],
+    [cw/2,ch],[cw/2+198,ch],[cw/2+396,ch],[cw+600,ch],[cw+800,ch],
+    [cw,ch+200],[cw+200,ch+200],[cw+200,ch+200],[cw+300,ch+200],[cw+400,ch+200],
+]
+
+export const pairs = [
+    [0,2],[1,3],[4,5],
+    [6,8],[7,9],[10,11],
+    
 ]
 
 export const faces = [
-    [0,0],[0,1],
-    [0,1],[0,0],
+    [1,0],[2,0],[1,0],
+    [2,0],[3,0],[3,0],
+    [4,1],[5,1],[4,1],
+    [5,1],[4,0],[4,0],
 ]
 
 export const gameState = {
