@@ -14,7 +14,7 @@ export class Cheese{
         this.width = 2*this.game.cw
         this.height = this.width * this.spriteHeight/this.spriteWidth
         this.ratio = this.spriteWidth/this.spriteHeight
-        console.log(this.width,this.height)
+      
         this.back = true
         this.matched = false
 

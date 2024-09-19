@@ -10,6 +10,41 @@
 </head>
 <body>
 
+    <div id="startoverlay">
+        <div class="player-name">
+            <input type="text" name="player" id="player" max="5">
+            <br/>   
+            <button id="stbtn">start</button>
+        </div>
+        <div class="hiscores">
+            hiscore:
+            <div class="numone">
+                <span id="nameone"></span>
+                <span id="scoreone"></span>
+            </div>
+            <div class="numtwo">
+                <span id="nametwo"></span>
+                <span id="scoretwo"></span>
+            </div>
+            <div class="numthree">
+                <span id="namethree"></span>
+                <span id="scorethree"></span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="finishoverlay">
+      
+            <input type="text" name="playername" id="playername" disabled>
+            <br/>   
+            <input type="number" name="playerscore" id="playerscore" disabled>
+            <br/>   
+            <button id="savebtn">save</button>
+        
+    </div>
+    
+
 
     <canvas id="canvas1"></canvas>
     <canvas id="canvas2"></canvas>

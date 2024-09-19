@@ -4,7 +4,7 @@ export class GameOverlay{
     constructor(game){
        this.game = game
         this.image = document.querySelector('#letters');
-        this.time = 10
+        this.time = 0
         this.timeTimer = 0
        
     }
@@ -27,8 +27,41 @@ export class GameOverlay{
         }
     }
 
+    drawTime(context){
+        const timeString = String(this.time).padStart(2, '00')
+        this.drawFrame(context,`time-${timeString.charAt(0)}`, 80,10 )
+        this.drawFrame(context,`time-${timeString.charAt(1)}`, 103,10 )
+    }
+
     drawScores(context){
-        this.drawScore(context, gameState.score, 4*this.game.cw)
+        this.drawScore(context, gameState.score, 5*this.game.cw)
+    }
+
+    drawScoreLabel(context, x){
+        context.save()
+        context.font = "100px Arial";
+            context.color = "white"
+            context.fillText(`${player.value}`, x, 15)    
+              context.restore()
+    }
+
+    draw(context){
+        this.drawTime(context)
+        this.drawScoreLabel(context, 200)
+       // this.drawScores(context)
+    }
+
+    updateTime(time){ 
+        
+        if(time.previous>this.timeTimer+1000){
+         if(this.time<=99)   this.time+=1
+            this.timeTimer=time.previous
+        }
+      }
+
+    update(time){
+        
+     this.updateTime(time)
     }
 
 }

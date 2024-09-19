@@ -4,7 +4,7 @@ canvas.width = innerWidth;
         canvas.height = innerHeight;
         canvas2.width = innerWidth;
         canvas2.height = innerHeight;
-        console.log(canvas.width,canvas.height)
+       // console.log(canvas.width,canvas.height)
 
         export const cw = Math.floor(canvas.width /10)
         export const ch = Math.floor(canvas.height/10)

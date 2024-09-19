@@ -53,7 +53,7 @@ html,
 
 			
 
-			#finish{
+			.finishoverlay{
 				display: none;
 				position: absolute;
 				top: 50%;
@@ -72,10 +72,10 @@ html,
 				z-index: 10;
 			}
 
-			.hiscores{
-				position: relative;
-				top: 40%;
-				left: 80%;
+			#startoverlay{
+				position: absolute;
+				top: 10%;
+				left: 70%;
 			}
 
 			
