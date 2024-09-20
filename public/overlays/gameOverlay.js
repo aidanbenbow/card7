@@ -39,9 +39,9 @@ export class GameOverlay{
 
     drawScoreLabel(context, x){
         context.save()
-        context.font = "100px Arial";
+        context.font = "30px Arial";
             context.color = "white"
-            context.fillText(`${player.value}`, x, 15)    
+            context.fillText(`${player.value}`, x, 25)    
               context.restore()
     }
 

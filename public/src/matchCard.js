@@ -57,16 +57,20 @@ this.ch=this.height/10
             const id = r<<16|g<<8|b
 
 if(id===0) return
+if(this.cardsToCheck.includes(id)) return
+if(this.matchedcards.includes(id)) return
 
                 this.cardsToCheck.push(id)
-                console.log(this.cardsToCheck)
+                
                  let crd = this.cards.find((elem)=>elem.id === id)
-                 console.log(crd)
+                 
               if(id) crd.back = false
              
-// if(this.cardsToCheck.length===2 
-//    ){
-    
+if(this.cardsToCheck.length===2 
+   ){
+    console.log(this.cardsToCheck)
+    this.match(this.cardsToCheck[0],this.cardsToCheck[1])
+                this.cardsToCheck = []
 //     for (let i = 0; i <= this.matchedcards.length; i++) {
 //         if(this.matchedcards[i]===this.cardsToCheck[0] ||
 //             this.matchedcards[i]===this.cardsToCheck[1]){
@@ -79,7 +83,7 @@ if(id===0) return
 //     } 
 //     }
     
-// }        
+ }        
         })
 
     }
@@ -90,6 +94,7 @@ if(id===0) return
            
         } else{
             setTimeout(()=>{
+                console.log(id,id2)
                 this.noMatch(id,id2)
             },1000)
         }
@@ -154,7 +159,7 @@ noMatch(id,id2){
 this.overlay.draw(this.c)
 if(this.gamestart) this.overlay.update(this.frameTime)
 
-if(this.matchedcards.length===3) this.gameover()
+if(this.matchedcards.length===12) this.gameover()
 
 }
 
@@ -184,9 +189,10 @@ if(this.matchedcards.length===3) this.gameover()
         
 }
 gameover(context){
+    this.gamestart=false
     finishoverlay.style.display='block'
     playername.value = `${player.value}`
-    playerscore.value = `${gameState.score}`
+    playerscore.value = `${this.overlay.time}`
 }
 
 }

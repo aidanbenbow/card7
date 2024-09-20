@@ -53,7 +53,7 @@ html,
 
 			
 
-			.finishoverlay{
+			#finishoverlay{
 				display: none;
 				position: absolute;
 				top: 50%;
