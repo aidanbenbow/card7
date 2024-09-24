@@ -4,13 +4,14 @@ import { GameOverlay } from '../overlays/gameOverlay.js'
 import { Cheese } from '../entities/cheese.js'
 import { getData, shuffleArray } from '../constants/utils.js'
 import { Grid } from '../entities/grid.js'
+import { Sound } from '../entities/sound.js'
 
 
 export class Game{
     constructor(){
-
+this.audio = new Sound()
         getData().then(res=>{
-            console.log(res)
+            
             return res
         }).then(data=>{
             console.log(data[0])
@@ -61,10 +62,10 @@ this.ch=this.height/10
            // this.startGame()
            startoverlay.style.display='none'
            this.gamestart =true
-           
-          },{once:true})
+           this.audio.bgMusic()
 
-        canvas.addEventListener('pointerdown', (e)=>{
+           canvas.addEventListener('pointerdown', (e)=>{
+            this.audio.flipMusic()
             const mousePos = {
                 x: e.offsetX,
                 y: e.offsetY, }
@@ -72,7 +73,7 @@ this.ch=this.height/10
         const [r,g,b,a] = this.c2.getImageData(mousePos.x,mousePos.y,1,1).data
             
             const id = r<<16|g<<8|b
-            console.log(id )
+            
 if(id===0) return
 if(this.cardsToCheck.includes(id)) return
 if(this.matchedcards.includes(id)) return
@@ -90,6 +91,10 @@ if(this.cardsToCheck.length===2
                 this.cardsToCheck = []
  }        
         })
+           
+          },{once:true})
+
+        
 
         savebtn.addEventListener('click', ()=>{
             let name = player.value
@@ -109,7 +114,7 @@ if(this.cardsToCheck.length===2
                       }
             
                       fetch('/api', options)
-              this.reset()
+                      document.location.reload()
                       },{once:true})
 
                       this.drawHit()
@@ -130,7 +135,7 @@ if(this.cardsToCheck.length===2
 }
 matched(id,id2){
     gameState.score++
-
+this.audio.matchMusic()
     let crd1 = this.grid.board.find((elem)=>elem.id === id)
     let crd2 = this.grid.board.find((elem)=>elem.id === id2)
            
@@ -144,7 +149,7 @@ noMatch(id,id2){
     let crd2 = this.grid.board.find((elem)=>elem.id === id2)
              crd1.back = true
              crd2.back = true
-            
+             this.audio.wrongMusic()
 }
 
     applyhitRegion(id){
@@ -210,29 +215,6 @@ if(this.matchedcards.length===12) this.gameover()
     start(){
         requestAnimationFrame(this.animate.bind(this)) 
 
-      
-
-        // for (let i = 0; i < this.cards.length; i++) {
-        //     if( this.rows>1){
-        //     this.rows--
-        //     this.cardsShuffled[i].x= this.cw*0.2 + i*this.cardsShuffled[i].width
-        //     }else if( this.rows<=1 && this.rows>-2 ){
-                
-        //         this.rows--
-        //         this.cardsShuffled[i].x=  this.cardsShuffled[i-3].x
-        //         this.cardsShuffled[i].y= this.ch + this.cardsShuffled[i].height
-        //     } else if(this.rows<=-2 && this.rows>-5){
-               
-        //        this.rows--
-        //         this.cardsShuffled[i].x=  this.cardsShuffled[i-6].x
-        //         this.cardsShuffled[i].y= this.ch + this.cardsShuffled[i].height *2
-        //     } else if(this.rows<=-5 ){
-        //         this.cardsShuffled[i].x=  this.cardsShuffled[i-9].x
-        //         this.cardsShuffled[i].y= this.ch + this.cardsShuffled[i].height *3
-        //     }
-           
-        // }
-        
 }
 gameover(context){
     this.gamestart=false

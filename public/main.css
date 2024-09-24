@@ -58,24 +58,36 @@ html,
 				position: absolute;
 				top: 50%;
 				left: 50%;
-				width: 2rem;
-				height: 1rem;
-			}
-
-			#gameinput{
-				position: absolute;
-				display: none;
-				top: 70%;
-				left: 30%;
-				width: 2rem;
-				height: 1rem;
-				z-index: 10;
+				transform: translate(-50%,-50%);
+				background-color: rgba(223, 229, 235,0.5);
+				padding: 1rem;
+				margin: 1rem;
 			}
 
 			#startoverlay{
 				position: absolute;
-				top: 10%;
-				left: 70%;
+				top: 50%;
+				left: 50%;
+				transform: translate(-150%,-150%);
+				background-color: rgba(223, 229, 235,0.5);
+				padding: 1rem;
+				margin: 1rem;
+			}
+
+			#player,#playername,#playerscore {
+				padding: 1rem;
+				margin: 1rem;
+			}
+
+			#stbtn, #savebtn{
+				padding: 1rem;
+				margin: 1rem;
+				font: 1em sans-serif;
+			}
+
+			.hiscores{
+				font: 1em sans-serif;
+				color: black;
 			}
 
 			

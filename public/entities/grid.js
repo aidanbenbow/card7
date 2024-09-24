@@ -8,6 +8,7 @@ this.cols = 3
         this.noCards = 12
         this.order = 0
         this.cards = []
+        this.cardsSelected = []
         this.x = 1
         this.maxX = 7
         this.y = 0
@@ -31,39 +32,43 @@ this.cols = 3
             this.x++
             this.order+=2
         }
-
+        
         this.grid()
         
     }
 grid(){
-    
-    
 for (let i = 0; i < this.noCards/2; i++) {
-    let rn = Math.floor(Math.random() * this.cards.length/2)
+    let rn = Math.floor(Math.random() * (this.cards.length-1)/2)
+    if(!this.cardsSelected.includes(rn)){
+    this.cardsSelected.push(rn)
+   
     this.cards.filter(elem=>{
         if(elem.or === rn){
  if(elem.a) {
      let rn2 = Math.floor(Math.random() * this.matrix.length)
      elem.gridPos = this.matrix[rn2]
- 
+    
      let inde = this.matrix.indexOf(this.matrix[rn2])
  this.matrix.splice(inde,1)
  this.board.push(elem)
+ 
  }
  else {
      let rn2 = Math.floor(Math.random() * this.matrix.length)
      elem.gridPos = this.matrix[rn2]
- 
+    
      let inde = this.matrix.indexOf(this.matrix[rn2])
  this.matrix.splice(inde,1)
  this.board.push(elem)
         }
-         
-     }})
+       
+     }})} else{
+        this.noCards+=2
+     }
     
 }
 
-    
+
 }
 draw(context, context2){
     for (const card of this.board) {

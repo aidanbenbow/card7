@@ -17,7 +17,7 @@ app.post('/api', (req,res)=>{
 })
 
 app.get('/api', (req,res)=>{
-    db.find({}).sort({score:-1}).limit(3).exec(function (err,data){
+    db.find({}).sort({score:1}).limit(3).exec(function (err,data){
         console.log(data)
         res.json(data)
     }) 
