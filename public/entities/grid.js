@@ -1,3 +1,4 @@
+import { gmGrid } from "../constants/screen.js"
 import { gameState } from "../states/gameState.js"
 import { playerState } from "../states/playerState.js"
 import { Cheese } from "./cheese.js"
@@ -15,12 +16,8 @@ this.cols = gameState.cols
         this.maxX = 7
         this.order=0
         this.board = []
-        this.matrix = [
-            [0,0],[1,0],[2,0],
-            [0,1],[1,1],[2,1],
-            [0,2],[1,2],[2,2],
-            [0,3],[1,3],[2,3],
-        ]
+        this.matrix = gmGrid
+        
         this.faces = [
             [0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0]
             ,[0,1],[1,1],[2,1],[3,1],[4,1],[5,1],[6,1],[7,1]

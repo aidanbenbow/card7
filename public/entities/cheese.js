@@ -1,5 +1,7 @@
+import {  bk, gmCH, gmCW } from "../constants/screen.js"
 import { gameState } from "../states/gameState.js"
 
+console.log(gmCW)
 
 export class Cheese{
     constructor(pos,face, id){
@@ -11,15 +13,18 @@ export class Cheese{
         this.spriteHeight = 100
         this.frameX = face[0]
         this.frameY = face[1]
-        this.x = 10
-        this.y = 50
+        this.x = gmCW/2
+        this.y = gmCH/2
         
-        this.width = gameState.width * 1.25
-        this.height = this.width * this.spriteHeight/this.spriteWidth
-        this.ratio = this.spriteWidth/this.spriteHeight
+        this.width = gmCW
+        this.height = gmCH
+        
       this.gridPos = [pos[0],pos[1]]
 
         this.back = true
+     
+        
+        
         this.matched = false
 
     }drawIDS(context){
@@ -43,7 +48,7 @@ export class Cheese{
         if(this.back){
             context.drawImage(this.image,
                 800,
-                0,
+                100*bk,
                 this.spriteWidth,this.spriteHeight, 
                 this.x+ this.width*this.gridPos[0],
                 this.y+ this.height*this.gridPos[1], 

@@ -143,6 +143,7 @@ this.audio.matchMusic()
 
 noMatch(id,id2){
     playerState.misses++
+    
     let crd1 = this.grid.cards.find((elem)=>elem.id === id)
     let crd2 = this.grid.cards.find((elem)=>elem.id === id2)
              crd1.back = true
