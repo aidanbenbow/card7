@@ -13,12 +13,13 @@ app.use(express.json())
 
 app.post('/api', (req,res)=>{   
     let dt = req.body
+   // console.log(dt)
     db.insert(dt)
 })
 
 app.get('/api', (req,res)=>{
-    db.find({}).sort({score:1}).limit(3).exec(function (err,data){
-        console.log(data)
+    db.find({}).sort({score:1, misses:-1}).limit(3).exec(function (err,data){
+       // console.log(data)
         res.json(data)
     }) 
 })

@@ -12,7 +12,7 @@
 
     <div id="startoverlay">
         <div class="player-name">
-            <input type="text" name="player" id="player" max="5">
+            <input type="text" name="player" id="player" maxlength="5">
             <br/>   
             <button id="stbtn">start</button>
         </div>
@@ -21,14 +21,17 @@
             <div class="numone">
                 <span id="nameone"></span>
                 <span id="scoreone"></span>
+                <span id="missesone"></span>
             </div>
             <div class="numtwo">
                 <span id="nametwo"></span>
                 <span id="scoretwo"></span>
+                <span id="missestwo"></span>
             </div>
             <div class="numthree">
                 <span id="namethree"></span>
                 <span id="scorethree"></span>
+                <span id="missesthree"></span>
             </div>
         </div>
 
@@ -40,11 +43,14 @@
             <br/>   
             <input type="number" name="playerscore" id="playerscore" disabled>
             <br/>   
+            <input type="number" name="playermisses" id="playermisses" disabled>
+            <br/>   
             <button id="savebtn">save</button>
-            <iframe width="420" height="315"
-            src="https://youtu.be/eZDaCWxRN68?si=4cU1wAX321JwZ4lB">
-            allow=”accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture” allowfullscreen
-            </iframe>
+            <br/>   
+           <a href="https://youtu.be/im-TlX3qZbs?si=HWHa7NW40Op2Mhcz" target="_blank">
+            <img src="./audio/thmb.png" alt="vid" class="ad" ></img>
+           </a> 
+            
     </div>
     
 
@@ -52,10 +58,10 @@
     <canvas id="canvas1"></canvas>
     <canvas id="canvas2"></canvas>
     
-
+<div class="assets">
     <img src="https://guessimage.s3.eu-north-1.amazonaws.com/cheese.png" id="cheese" ></img>
     <img src="https://guessimage.s3.eu-north-1.amazonaws.com/tiles.png" id="letters" ></img>
-    <img src="https://guessimage.s3.eu-north-1.amazonaws.com/cards.png" id="cards"></img>
+    <img src="https://guessimage.s3.eu-north-1.amazonaws.com/cards3.png" id="cards"></img>
     <img src="https://guessimage.s3.eu-north-1.amazonaws.com/background.png" alt="bg" id="scene1">
     <img src="https://guessimage.s3.eu-north-1.amazonaws.com/intro+scene.png" id="scene"></img>
     <img src="https://guessimage.s3.eu-north-1.amazonaws.com/btns.png" id="btns"></img>
@@ -65,7 +71,7 @@
     <audio src="./audio/match.mp3" id="flip"  preload="auto"></audio>
     <audio src="./audio/victory.mp3" id="match"  preload="auto"></audio>
     <audio src="./audio/game-over.mp3" id="wrong"  preload="auto"></audio>
-    
+</div>
     
     <script type="module"  src="./main.js"></script>
 </body>

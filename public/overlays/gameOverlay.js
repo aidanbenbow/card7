@@ -1,10 +1,12 @@
-import { ch, cw, gameState, nums} from "../constants/constant.js";
+import { ch, cw, nums} from "../constants/constant.js";
+import { gameState } from "../states/gameState.js";
+import { playerState } from "../states/playerState.js";
 
 export class GameOverlay{
     constructor(game){
        this.game = game
         this.image = document.querySelector('#letters');
-        this.time = 0
+        this.time = gameState.time
         this.timeTimer = 0
        
     }
@@ -22,39 +24,40 @@ export class GameOverlay{
         const buffer = ((4*20)-strValue.length*20)
         
         for (let i = 0; i < strValue.length; i++) {
-            this.drawFrame(context, `score-${strValue[i]}`, x+buffer+i*20, this.game.ch*0.5)
+            this.drawFrame(context, `score-${strValue[i]}`, x+buffer+i*20, gameState.height*0.2)
             
         }
     }
 
     drawTime(context){
-        const timeString = String(this.time).padStart(2, '00')
-        this.drawFrame(context,`time-${timeString.charAt(0)}`, 80,10 )
-        this.drawFrame(context,`time-${timeString.charAt(1)}`, 103,10 )
+        const timeString = String(gameState.time).padStart(2, '00')
+        this.drawFrame(context,`time-${timeString.charAt(0)}`, 4.5*gameState.width,0.2*gameState.height )
+        this.drawFrame(context,`time-${timeString.charAt(1)}`, 4.5*gameState.width+30,0.2*gameState.height )
     }
 
     drawScores(context){
-        this.drawScore(context, gameState.score, 5*this.game.cw)
+        this.drawScore(context, playerState.score, 1.0*gameState.width)
+        this.drawScore(context, playerState.misses, 2.0*gameState.width)
     }
 
     drawScoreLabel(context, x){
         context.save()
         context.font = "30px Arial";
             context.color = "white"
-            context.fillText(`${player.value}`, x, 25)    
+            context.fillText(`${player.value}`, x, 1.1*gameState.height)    
               context.restore()
     }
 
     draw(context){
         this.drawTime(context)
-        this.drawScoreLabel(context, 200)
-       // this.drawScores(context)
+        this.drawScoreLabel(context, 0.5*gameState.width)
+        this.drawScores(context)
     }
 
     updateTime(time){ 
         
         if(time.previous>this.timeTimer+1000){
-         if(this.time<=99)   this.time+=1
+         if(gameState.time>0)   gameState.time-=1
             this.timeTimer=time.previous
         }
       }

@@ -1,30 +1,31 @@
+import { gameState } from "../states/gameState.js"
 
 
 export class Cheese{
-    constructor(game,pos,face, or, a, id){
-        this.game=game
-        this.image = document.querySelector(`#cheese`)
+    constructor(pos,face, id){
+        
+        this.image = document.querySelector(`#cards`)
         this.id = id
-        this.or = or
-        this.a=a
+        
         this.spriteWidth = 100
         this.spriteHeight = 100
         this.frameX = face[0]
         this.frameY = face[1]
-        this.x = pos[0]
-        this.y = pos[1]
-        this.width = 2*this.game.cw
+        this.x = 10
+        this.y = 50
+        
+        this.width = gameState.width * 1.25
         this.height = this.width * this.spriteHeight/this.spriteWidth
         this.ratio = this.spriteWidth/this.spriteHeight
-      this.gridPos = [0,0]
+      this.gridPos = [pos[0],pos[1]]
 
         this.back = true
         this.matched = false
 
-    }drawIDS(context,x,y){
+    }drawIDS(context){
         this.applyhitRegion()
         
-        context.fillRect( this.x+ this.width*x,this.y+ this.height*y,this.width,this.height,)
+        context.fillRect( this.x+ this.width*this.gridPos[0],this.y+ this.height*this.gridPos[1],this.width,this.height,)
         }
         
             applyhitRegion(){
@@ -32,15 +33,16 @@ export class Cheese{
                 const red = (this.id & 0xFF0000)>>16
                 const green = (this.id & 0x00FF00)>>8
                 const blue = (this.id & 0x0000FF)
-                
-                this.game.c2.fillStyle = `rgb(${red},${green},${blue})`
-                this.game.c2.stokeStyle = `rgb(${red},${green},${blue})`
+              
+                gameState.c2.fillStyle = `rgb(${red},${green},${blue})`
+                gameState.c2.stokeStyle = `rgb(${red},${green},${blue})`
             }
 
     draw(context){
+        
         if(this.back){
             context.drawImage(this.image,
-                0,
+                800,
                 0,
                 this.spriteWidth,this.spriteHeight, 
                 this.x+ this.width*this.gridPos[0],

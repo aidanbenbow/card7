@@ -58,9 +58,7 @@ export const faces = [
     [5,1,4],[4,0,5],[4,0,5],
 ]
 
-export const gameState = {
-    score: 0
- }
+
 
 export function getContext(){
     const c = canvas.getContext('2d');
