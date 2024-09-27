@@ -8,7 +8,7 @@ export class Grid{
 this.game = game
 this.cols = this.game.level.cols
         this.rows = this.game.level.rows
-        console.log(this.cols)
+        
         this.noCards = this.cols * this.rows
         
         this.cards = []
@@ -18,10 +18,11 @@ this.cols = this.game.level.cols
         this.order=0
         this.board = []
         this.matrix = this.game.level.grid
-        
+        this.f1= this.game.level.cardFaces[0]
+        this.f2= this.game.level.cardFaces[1]
         this.faces = [
-            [0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0]
-            ,[0,1],[1,1],[2,1],[3,1],[4,1],[5,1],[6,1],[7,1]
+            [0,this.f1],[1,this.f1],[2,this.f1],[3,this.f1],[4,this.f1],[5,this.f1],[6,this.f1],[7,this.f1]
+            ,[0,this.f2],[1,this.f2],[2,this.f2],[3,this.f2],[4,this.f2],[5,this.f2],[6,this.f2],[7,this.f2]
         ]
         this.id1 = null
 

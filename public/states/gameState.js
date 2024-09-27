@@ -7,6 +7,7 @@ export const gameState = {
     cols: 3,
     level:0,
     noCards: 6,
+    
     width: cw,
     height: ch,
     c1: canvas.getContext('2d'),

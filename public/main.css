@@ -73,12 +73,12 @@ html,
 				margin: 1rem;
 			}
 
-			#player,#playername,#playerscore,#playermisses {
+			#player,#playername,#playerscore,#playermisses,#levelscore,#levelmisses {
 				padding: 1rem;
 				margin: 1rem;
 			}
 
-			#stbtn, #savebtn{
+			#stbtn, #savebtn, #levelbtn{
 				padding: 1rem;
 				margin: 1rem;
 				font: 1em sans-serif;

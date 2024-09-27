@@ -7,6 +7,10 @@ export class Levels{
         this.noCards = gameState.noCards
         this.level = gameState.level
         this.totcards = this.noCards+this.level
+this.set = Math.floor((Math.random()+0.2)* 2)
+this.cardSet = [[0,1],[2,3],[4,5]]
+this.cardFaces = this.cardSet[this.set]
+
         this.sw = canvas.width
 this.sh = canvas.height
 this.cols = null

@@ -8,12 +8,17 @@ import { Sound } from '../entities/sound.js'
 import { gameState } from '../states/gameState.js'
 import { playerState } from '../states/playerState.js'
 import { Levels } from '../constants/screen.js'
+import { Ads } from '../constants/ads.js'
 
 
 export class Game{
     constructor(){
 this.audio = new Sound()
 this.level = new Levels()
+this.ads = new Ads()
+//leveloverlay.append(this.ads.href)
+
+
 
         getData().then(res=>{
             
@@ -102,7 +107,6 @@ if(this.cardsToCheck.length===2
             this.grid =  new Grid(this)
   this.overlay.time = gameState.time
             
-            console.log(gameState,this.grid)
           
         })
 
@@ -129,7 +133,7 @@ if(this.cardsToCheck.length===2
                       document.location.reload()
                       },{once:true})
 
-                      
+                      finishoverlay.append(this.ads.href)
 
     }
     match(id, id2 ){ 
@@ -196,6 +200,7 @@ gameover(context){
     playername.value = `${player.value}`
     playerscore.value = `${playerState.score}`
     playermisses.value = `${playerState.misses}`
+    
 }
 
 nextLevel(){
