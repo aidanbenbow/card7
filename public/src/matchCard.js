@@ -7,11 +7,14 @@ import { Grid } from '../entities/grid.js'
 import { Sound } from '../entities/sound.js'
 import { gameState } from '../states/gameState.js'
 import { playerState } from '../states/playerState.js'
+import { Levels } from '../constants/screen.js'
 
 
 export class Game{
     constructor(){
 this.audio = new Sound()
+this.level = new Levels()
+
         getData().then(res=>{
             
             return res
@@ -94,8 +97,11 @@ if(this.cardsToCheck.length===2
             this.gamestart =true
             this.matchedcards=[]
             gameState.level+=2
+            gameState.time+=5
+            this.level =  new Levels()
             this.grid =  new Grid(this)
-            this.overlay.time+=5
+  this.overlay.time = gameState.time
+            
             console.log(gameState,this.grid)
           
         })
@@ -176,7 +182,7 @@ this.overlay.draw(this.c)
 if(this.gamestart) this.overlay.update(this.frameTime)
 
 if(this.overlay.time===0) this.gameover()
-if(this.matchedcards.length===gameState.noCards) this.nextLevel()
+if(this.matchedcards.length===this.level.totcards) this.nextLevel()
 
 }
 

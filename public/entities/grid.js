@@ -6,8 +6,9 @@ import { Cheese } from "./cheese.js"
 export class Grid{
     constructor(game){
 this.game = game
-this.cols = gmCols
-        this.rows = gmRows
+this.cols = this.game.level.cols
+        this.rows = this.game.level.rows
+        console.log(this.cols)
         this.noCards = this.cols * this.rows
         
         this.cards = []
@@ -16,7 +17,7 @@ this.cols = gmCols
         this.maxX = 7
         this.order=0
         this.board = []
-        this.matrix = gmGrid
+        this.matrix = this.game.level.grid
         
         this.faces = [
             [0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0]
@@ -26,7 +27,7 @@ this.cols = gmCols
 
         this.num = []
 
-        while (this.cardsSelected.length<=(gameState.noCards-1)) {
+        while (this.cardsSelected.length<=(this.game.level.totcards-1)) {
             let rn2 = Math.floor(Math.random() * this.matrix.length)
           
             if(this.cardsSelected.indexOf(rn2)==-1){
@@ -43,8 +44,8 @@ this.cols = gmCols
             let rn = this.cardsSelected[i]
             let rn3 = this.cardsSelected[i+1]
             
-                this.cards.push(new Cheese(this.matrix[rn],this.faces[rnF],  this.id1))
-                this.cards.push(new Cheese(this.matrix[rn3],this.faces[rnF],  this.id1+10))
+                this.cards.push(new Cheese(this.game,this.matrix[rn],this.faces[rnF],  this.id1))
+                this.cards.push(new Cheese(this.game,this.matrix[rn3],this.faces[rnF],  this.id1+10))
           
             let inde3 = this.faces.indexOf(this.faces[rnF])
             this.faces.splice(inde3,1)

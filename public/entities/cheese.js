@@ -3,8 +3,8 @@ import { gameState } from "../states/gameState.js"
 
 
 export class Cheese{
-    constructor(pos,face, id){
-        
+    constructor(game,pos,face, id){
+        this.game = game
         this.image = document.querySelector(`#cards`)
         this.id = id
         
@@ -12,11 +12,12 @@ export class Cheese{
         this.spriteHeight = 100
         this.frameX = face[0]
         this.frameY = face[1]
-        this.x = gmCW/2
-        this.y = gmCH/2
         
-        this.width = gmCW
-        this.height = gmCH
+        this.width = this.game.level.cardWidth
+        this.height = this.game.level.cardHeight
+
+        this.x = this.width/2
+        this.y = this.height/2
         
       this.gridPos = [pos[0],pos[1]]
 
