@@ -30,7 +30,7 @@ export class GameOverlay{
     }
 
     drawTime(context){
-        const timeString = String(gameState.time).padStart(2, '00')
+        const timeString = String(this.time).padStart(2, '00')
         this.drawFrame(context,`time-${timeString.charAt(0)}`, 4.5*gameState.width,0.2*gameState.height )
         this.drawFrame(context,`time-${timeString.charAt(1)}`, 4.5*gameState.width+30,0.2*gameState.height )
     }
@@ -57,7 +57,7 @@ export class GameOverlay{
     updateTime(time){ 
         
         if(time.previous>this.timeTimer+1000){
-         if(gameState.time>0)   gameState.time-=1
+         if(this.time>0)   this.time-=1
             this.timeTimer=time.previous
         }
       }

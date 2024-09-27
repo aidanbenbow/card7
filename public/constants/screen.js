@@ -12,10 +12,10 @@ let grid = []
 
 
 
-export const num = optimizedDivisors(gameState.noCards);
+export const num = optimizedDivisors(gameState.noCards+gameState.level);
 
 
-console.log(sw,sh)
+
 if(sw>sh){
     rows = num[(num.length/2)-1]
     cols= num[(num.length/2)]
@@ -24,11 +24,11 @@ if(sw>sh){
     cols = num[(num.length/2)-1]
     rows  = num[(num.length/2)]
 }
-console.log(cols,rows)
+
 cardWidth = sw/(cols+1)
 cardHeight = sh/(rows+1)
 
-console.log(cardWidth, cardHeight)
+
 
 for (let i = 0; i < cols; i++) {
    for (let y = 0; y < rows; y++) {
@@ -36,7 +36,7 @@ for (let i = 0; i < cols; i++) {
    }
     
 }
-console.log(grid)
+
 
 
 export const gmCols = cols 
@@ -49,3 +49,4 @@ let rnbks = Math.floor((Math.random()+0.2)*2)
 let bks = [0,2,4]
 
 export const bk = bks[rnbks]
+

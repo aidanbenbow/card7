@@ -1,7 +1,6 @@
 import {  bk, gmCH, gmCW } from "../constants/screen.js"
 import { gameState } from "../states/gameState.js"
 
-console.log(gmCW)
 
 export class Cheese{
     constructor(pos,face, id){

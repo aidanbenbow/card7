@@ -1,4 +1,4 @@
-import { gmGrid } from "../constants/screen.js"
+import { gmCols, gmGrid, gmRows } from "../constants/screen.js"
 import { gameState } from "../states/gameState.js"
 import { playerState } from "../states/playerState.js"
 import { Cheese } from "./cheese.js"
@@ -6,8 +6,8 @@ import { Cheese } from "./cheese.js"
 export class Grid{
     constructor(game){
 this.game = game
-this.cols = gameState.cols
-        this.rows = gameState.rows
+this.cols = gmCols
+        this.rows = gmRows
         this.noCards = this.cols * this.rows
         
         this.cards = []
@@ -26,7 +26,7 @@ this.cols = gameState.cols
 
         this.num = []
 
-        while (this.cardsSelected.length<=11) {
+        while (this.cardsSelected.length<=(gameState.noCards-1)) {
             let rn2 = Math.floor(Math.random() * this.matrix.length)
           
             if(this.cardsSelected.indexOf(rn2)==-1){
@@ -34,6 +34,8 @@ this.cols = gameState.cols
             }
     
         }
+
+     
         
         for (let i = 0; i < this.noCards; i+=2) {
             this.id1= Math.floor(16777216 * Math.random())

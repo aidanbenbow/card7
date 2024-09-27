@@ -22,13 +22,13 @@ this.audio = new Sound()
             let pl3 = data[2]
            nameone.innerHTML = pl1.name
            scoreone.innerHTML = pl1.score
-           missesone.innerHTML = pl1.misses
+          
            nametwo.innerHTML = pl2.name
            scoretwo.innerHTML = pl2.score
-           missestwo.innerHTML = pl2.misses
+         
            namethree.innerHTML = pl3.name
            scorethree.innerHTML = pl3.score
-           missesthree.innerHTML = pl3.misses
+           
         })
 
         this.c = gameState.c1
@@ -89,7 +89,16 @@ if(this.cardsToCheck.length===2
            
           },{once:true})
 
-        
+        levelbtn.addEventListener('click',()=>{
+            leveloverlay.style.display='none'
+            this.gamestart =true
+            this.matchedcards=[]
+            gameState.level+=2
+            this.grid =  new Grid(this)
+            this.overlay.time+=5
+            console.log(gameState,this.grid)
+          
+        })
 
         savebtn.addEventListener('click', ()=>{
             let name = player.value
@@ -166,7 +175,8 @@ this.grid.draw(this.c, this.c2)
 this.overlay.draw(this.c)
 if(this.gamestart) this.overlay.update(this.frameTime)
 
-if(this.matchedcards.length===12|| gameState.time===0) this.gameover()
+if(this.overlay.time===0) this.gameover()
+if(this.matchedcards.length===gameState.noCards) this.nextLevel()
 
 }
 
@@ -182,8 +192,12 @@ gameover(context){
     playermisses.value = `${playerState.misses}`
 }
 
-reset(){
-    console.log('rs')
+nextLevel(){
+    this.gamestart=false
+    leveloverlay.style.display='block'
+    
+    levelscore.value = `${playerState.score}`
+    levelmisses.value = `${playerState.misses}`
 }
 
 }

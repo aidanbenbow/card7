@@ -52,7 +52,7 @@ html,
 
 			
 
-			#finishoverlay{
+			#finishoverlay,#leveloverlay{
 				display: none;
 				position: absolute;
 				top: 50%;
@@ -85,7 +85,7 @@ html,
 			}
 
 			.hiscores{
-				font: 1em sans-serif;
+				font: 1.5em sans-serif;
 				color: black;
 			}
 
