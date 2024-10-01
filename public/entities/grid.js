@@ -52,59 +52,9 @@ this.cols = this.game.level.cols
             this.faces.splice(inde3,1)
             
         }
-        
-       
-        // for (let i = 0; i <= this.maxX; i++) {
-        //    this.id1= Math.floor(16777216 * Math.random())
-        //     this.cards.push(new Cheese([10,50],[i,0], this.order,true, this.id1))
-        //     this.cards.push(new Cheese([10,50],[i,0], this.order,false, this.id1+10))
-        //     this.cards.push(new Cheese([10,50],[i,1], this.order+1,true,this.id1+20))
-        //     this.cards.push(new Cheese([10,50],[i,1], this.order+1,false,this.id1+30))
-        //     this.x++
-        //     this.order+=2
-        // }
-        
-        
-        
-    }randomFace(){
-        let rn = Math.floor(Math.random() * (this.faces.length-1)/2)
-
+     
     }
 
-grid(){
-for (let i = 0; i < this.noCards/2; i++) {
-    let rn = Math.floor(Math.random() * (this.cards.length-1)/2)
-    if(!this.cardsSelected.includes(rn)){
-    this.cardsSelected.push(rn)
-   
-    this.cards.filter(elem=>{
-        if(elem.or === rn){
- if(elem.a) {
-     let rn2 = Math.floor(Math.random() * this.matrix.length)
-     elem.gridPos = this.matrix[rn2]
-    
-     let inde = this.matrix.indexOf(this.matrix[rn2])
- this.matrix.splice(inde,1)
- this.board.push(elem)
- 
- }
- else {
-     let rn2 = Math.floor(Math.random() * this.matrix.length)
-     elem.gridPos = this.matrix[rn2]
-    
-     let inde = this.matrix.indexOf(this.matrix[rn2])
- this.matrix.splice(inde,1)
- this.board.push(elem)
-        }
-       
-     }})} else{
-        this.noCards+=2
-     }
-    
-}
-
-
-}
 draw(context, context2){
     for (const card of this.cards) {
         card.draw(context)

@@ -2,7 +2,7 @@ import { canvas, canvas2, ch, cw } from "../constants/constant.js";
 
 
 export const gameState = {
-    time: 10,
+    time: 15,
     rows: 4,
     cols: 3,
     level:0,

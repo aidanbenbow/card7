@@ -1,6 +1,6 @@
 
 
-import { vs } from "./constants/ads.js"
+
 import { Game } from "./src/matchCard.js"
 
 

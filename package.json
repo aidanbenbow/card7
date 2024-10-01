@@ -16,6 +16,8 @@
   },
   "dependencies": {
     "express": "^4.19.2",
+    "mongodb": "^6.9.0",
+    "mongoose": "^8.7.0",
     "nedb": "^1.8.0"
   }
 }

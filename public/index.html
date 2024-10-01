@@ -11,7 +11,10 @@
 <body>
 
     <div id="startoverlay">
+        <h3>Match Game</h3>
+        
         <div class="player-name">
+            <label for="player">name</label>
             <input type="text" name="player" id="player" maxlength="5">
             <br/>   
             <button id="stbtn">start</button>
@@ -39,11 +42,14 @@
 
     <div id="leveloverlay">
       
-        <label for="levelscore">score</label>
+        <label for="levelscore">Total score</label>
         <input type="number" name="levelscore" id="levelscore" disabled>
         <br/> 
         <label for="levelmisses">misses</label>  
         <input type="number" name="levelmisses" id="levelmisses" disabled>
+        <br/>  
+        <label for="timeremaining">time</label>  
+        <input type="number" name="timeremaining" id="timeremaining" disabled>
         <br/>   
         <button id="levelbtn">new level</button>
         <br/>   
@@ -55,9 +61,13 @@
       
             <input type="text" name="playername" id="playername" disabled>
             <br/>   
+            <label for="penaltymisses">total misses</label>  
+        <input type="number" name="penaltymisses" id="penaltymisses" disabled>
+        <br/>  
+        <label for="playerscore">total score</label>  
             <input type="number" name="playerscore" id="playerscore" disabled>
             <br/>   
-            <input type="number" name="playermisses" id="playermisses" disabled>
+            <textarea name="comments" id="comments" cols="30" rows="10">Leave a comment</textarea>
             <br/>   
             <button id="savebtn">save</button>
             <br/>   
