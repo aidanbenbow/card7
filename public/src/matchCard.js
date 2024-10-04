@@ -111,7 +111,7 @@ if(this.cardsToCheck.length===2
             this.gamestart =true
             this.matchedcards=[]
             this.lev++
-            gameState.time+=10
+            gameState.time+=10*this.lev
             this.level =  new Levels(this.lev)
             this.grid =  new Grid(this)
   this.overlay.time = gameState.time

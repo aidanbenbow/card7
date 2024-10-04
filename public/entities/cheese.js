@@ -67,11 +67,11 @@ export class Cheese{
                 this.width ,
                 this.height )  
         }   
-        if(this.clicked) this.smoke.draw(context)
+       // if(this.clicked) this.smoke.draw(context)
             }
         
             update(time){
-                if(this.clicked) this.smoke.update(time)
+              //  if(this.clicked) this.smoke.update(time)
             }
 
 }
