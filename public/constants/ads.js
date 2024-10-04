@@ -15,7 +15,7 @@ export class Ads{
         this.img.style.class = 'ad'
         this.img.style.width = '350px'
         this.img.style.height = '150px'
-        console.log(this.set)
+        
 
         this.href = document.createElement('a')
         this.href.href = `${this.refs[this.set]}`

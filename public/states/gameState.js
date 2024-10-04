@@ -5,7 +5,7 @@ export const gameState = {
     time: 15,
     rows: 4,
     cols: 3,
-    level:0,
+    level:[6,12,32],
     noCards: 6,
     
     width: cw,

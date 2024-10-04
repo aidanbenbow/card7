@@ -21,10 +21,10 @@ export class SmokePuff{
                 this.width*this.frameX,
                 this.height*this.frameY,
                 this.width,this.height, 
-                this.x+100,this.y+100, 
+                this.x+this.width/4,this.y+this.height/4, 
                 this.width,this.height) 
         }
-            
+        
     }
     update(time){
         const [,framedelay] = this.animation[this.frameX]

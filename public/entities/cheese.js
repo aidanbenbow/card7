@@ -1,3 +1,4 @@
+import { SmokePuff } from "../animations/smokePuff.js"
 import {  bk, gmCH, gmCW } from "../constants/screen.js"
 import { gameState } from "../states/gameState.js"
 
@@ -22,9 +23,11 @@ export class Cheese{
       this.gridPos = [pos[0],pos[1]]
 
         this.back = true
+        this.clicked = false
+
+        this.smoke = new SmokePuff([this.x+ this.width*this.gridPos[0],
+        this.y+ this.height*this.gridPos[1]])
      
-        
-        
         this.matched = false
 
     }drawIDS(context){
@@ -64,11 +67,11 @@ export class Cheese{
                 this.width ,
                 this.height )  
         }   
-        
+        if(this.clicked) this.smoke.draw(context)
             }
         
             update(time){
-        
+                if(this.clicked) this.smoke.update(time)
             }
 
 }

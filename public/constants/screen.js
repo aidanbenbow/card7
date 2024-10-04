@@ -3,13 +3,13 @@ import { canvas } from "./constant.js";
 import { optimizedDivisors } from "./utils.js";
 
 export class Levels{
-    constructor(){
+    constructor(i){
         this.noCards = gameState.noCards
         this.level = gameState.level
-        this.totcards = this.noCards+this.level
+        this.totcards = gameState.level[i]
 this.set = Math.floor((Math.random()+0.2)* 2)
 this.cardSet = [[0,1],[2,3],[4,5]]
-this.cardFaces = this.cardSet[this.set]
+this.cardFaces = [0,1,2,3,4,5]
 
         this.sw = canvas.width
 this.sh = canvas.height
@@ -21,16 +21,16 @@ this.grid = []
 this.num = optimizedDivisors(this.totcards)
 this.rowsCols()
 this.gridMake()
-
+console.log(this.grid) 
 
     }rowsCols(){
         if(this.sw>this.sh){
-            this.rows = this.num[(this.num.length/2)-1]
-            this.cols= this.num[(this.num.length/2)]
+            this.rows = this.num[Math.round((this.num.length/2))-1]
+            this.cols= this.num[Math.round((this.num.length/2))]
         
         } else{
-            this.cols = this.num[(this.num.length/2)-1]
-            this.rows  = this.num[(this.num.length/2)]
+            this.cols = this.num[Math.round((this.num.length/2))-1]
+            this.rows  = this.num[Math.round((this.num.length/2))]
         }
         
         this.cardWidth = this.sw/(this.cols+1)

@@ -14,13 +14,14 @@ import { Ads } from '../constants/ads.js'
 export class Game{
     constructor(){
 this.audio = new Sound()
-this.level = new Levels()
+this.lev = 0
+this.level = new Levels(this.lev)
 this.ads = [new Ads(),new Ads(),new Ads()]
 startoverlay.append(this.ads[0].href)
 leveloverlay.append(this.ads[1].href)
 
 this.misses = 0
-    this.bonus = 0
+    this.bonuses = false
     this.score = playerState.score
 
 
@@ -91,7 +92,9 @@ if(this.matchedcards.includes(id)) return
                 
                  let crd = this.grid.cards.find((elem)=>elem.id === id)
                  
-              if(id) crd.back = false
+              if(id) {
+                crd.back = false
+                crd.clicked = true}
              
 if(this.cardsToCheck.length===2 
    ){
@@ -107,12 +110,12 @@ if(this.cardsToCheck.length===2
             leveloverlay.style.display='none'
             this.gamestart =true
             this.matchedcards=[]
-            gameState.level+=2
+            this.lev++
             gameState.time+=10
-            this.level =  new Levels()
+            this.level =  new Levels(this.lev)
             this.grid =  new Grid(this)
   this.overlay.time = gameState.time
-            
+            this.bonuses=false
           
         })
 
@@ -145,7 +148,7 @@ if(this.cardsToCheck.length===2
     match(id, id2 ){ 
         
         if(id===(id2-10) || id-10===(id2)){  
-            console.log('mat')
+           // console.log('mat')
             this.matched( id,id2)
            
         } else{
@@ -173,6 +176,8 @@ noMatch(id,id2){
     let crd2 = this.grid.cards.find((elem)=>elem.id === id2)
              crd1.back = true
              crd2.back = true
+             crd1.clicked = false
+             crd2.clicked = false
              this.audio.wrongMusic()
 }
 
@@ -187,6 +192,7 @@ noMatch(id,id2){
         }
         
 this.grid.draw(this.c, this.c2)
+this.grid.update(this.frameTime)
 
 this.overlay.draw(this.c)
 if(this.gamestart) this.overlay.update(this.frameTime)
@@ -208,13 +214,13 @@ if(this.matchedcards.length===this.level.totcards) this.nextLevel()
 gameover(context){
     this.penalty = Math.floor(playerState.misses/5)
     
-    this.score = playerState.score-this.penalty
+    if(!this.bonuses)  playerState.score-=this.penalty
     this.gamestart=false
     finishoverlay.style.display='block'
     playername.value = `${player.value}`
-    playerscore.value = `${score}`
+    playerscore.value = `${playerState.score}`
     penaltymisses.value = `${playerState.misses}`
-    
+    this.bonuses=true
 }
 
 nextLevel(){
@@ -223,11 +229,12 @@ nextLevel(){
     leveloverlay.style.display='block'
     
     this.bonus = Math.floor(this.overlay.time/5)
-    this.score = playerState.score +this.bonus
+   if(!this.bonuses) playerState.score +=this.bonus
     
-    levelscore.value = `${this.score}`
+    levelscore.value = `${playerState.score}`
     levelmisses.value = `${playerState.misses}`
-    timeremaining.value = `${this.overlay.time}`
+    timeremaining.value = `${this.bonus}`
+    this.bonuses=true
     
 }
 
