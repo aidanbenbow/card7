@@ -111,7 +111,7 @@ if(this.cardsToCheck.length===2
             this.gamestart =true
             this.matchedcards=[]
             this.lev++
-            gameState.time+=10*this.lev
+            
             this.level =  new Levels(this.lev)
             this.grid =  new Grid(this)
   this.overlay.time = gameState.time
@@ -202,7 +202,7 @@ for (const entity in this.entities) {
     entity.update(this.frameTime)
 }
 
-if(this.overlay.time===0) this.gameover()
+if(this.overlay.time===100) this.gameover()
 if(this.matchedcards.length===this.level.totcards) this.nextLevel()
 
 }
@@ -228,8 +228,8 @@ nextLevel(){
     
     leveloverlay.style.display='block'
     
-    this.bonus = Math.floor(this.overlay.time/5)
-   if(!this.bonuses) playerState.score +=this.bonus
+    this.bonus = Math.floor(this.overlay.time/20)
+   if(!this.bonuses) playerState.score -=this.bonus
     
     levelscore.value = `${playerState.score}`
     levelmisses.value = `${playerState.misses}`

@@ -60,7 +60,7 @@ export class GameOverlay{
     updateTime(time){ 
         
         if(time.previous>this.timeTimer+1000){
-         if(this.time>0)   this.time-=1
+           this.time+=1
             this.timeTimer=time.previous
         }
       }
