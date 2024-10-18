@@ -1,47 +1,82 @@
+import { Cheese } from "../entities/cheese.js";
 import { gameState } from "../states/gameState.js";
-import { canvas } from "./constant.js";
+import { animals, canvas, cheese, trees } from "./constant.js";
 import { optimizedDivisors } from "./utils.js";
 
 export class Levels{
     constructor(i){
-        this.noCards = gameState.noCards
-        this.level = gameState.level
+       
         this.totcards = gameState.level[i]
-this.set = Math.floor((Math.random()+0.2)* 2)
-this.cardSet = [[0,1],[2,3],[4,5]]
-this.cardFaces = [0,1,2,3,4,5]
-
-        this.sw = canvas.width
-this.sh = canvas.height
-this.cols = null
-this.rows = null
-this.cardWidth = null
-this.cardHeight = null
-this.grid = []
-this.num = optimizedDivisors(this.totcards)
-this.rowsCols()
-this.gridMake()
-console.log(this.grid) 
-
-    }rowsCols(){
-        if(this.sw>this.sh){
-            this.rows = this.num[Math.round((this.num.length/2))-1]
-            this.cols= this.num[Math.round((this.num.length/2))]
+       
+        if(canvas.width>canvas.height){
+            this.rows = this.totcards[0]
+            this.cols= this.totcards[1]
         
         } else{
-            this.cols = this.num[Math.round((this.num.length/2))-1]
-            this.rows  = this.num[Math.round((this.num.length/2))]
+            this.cols = this.totcards[0]
+            this.rows  = this.totcards[1]
+        }
+        this.noCards = this.cols*this.rows
+        
+        this.cardWidth = canvas.width/(this.cols+1)
+this.cardHeight = canvas.height/(this.rows+1)
+this.dim = [ this.cardWidth,this.cardHeight]
+
+this.cardset = [cheese, trees,animals]
+
+this.faces = this.cardset[gameState.cards[i]]
+
+this.select = this.faces.sort(()=>{
+    return Math.random() - 0.5
+})
+
+this.select.filter((elem)=>{
+elem[1]>3
+})
+console.log(this.select)
+
+        this.cards = []
+
+        for (let i = 0; i < this.noCards/2; i++) {
+            this.id1= Math.floor(16777216 * Math.random())
+            this.cards.push(new Cheese(this.dim,this.faces[i],  this.id1))
+                this.cards.push(new Cheese(this.dim,this.faces[i],  this.id1+10))
+          
         }
         
-        this.cardWidth = this.sw/(this.cols+1)
-        this.cardHeight = this.sh/(this.rows+1)
+      
+        this.cardgrid = this.cards.sort(()=>{
+            return Math.random() - 0.5
+        })
+
+
+this.grid = 0
+
+
+this.gridMake()
+
+
     }
     gridMake(){
         for (let i = 0; i < this.cols; i++) {
             for (let y = 0; y < this.rows; y++) {
-                this.grid.push([i,y])
+                let pos = [i,y]
+                this.cardgrid[this.grid].gridPos = pos
+                this.grid++
             }
          }
+    }
+    draw(context, context2){
+        for (const card of this.cardgrid) {
+            card.draw(context)
+            
+           card.drawIDS(context2)
+        }
+    }
+    update(time, context){
+        for (const card of this.cardgrid) {
+            card.update(time,context)      
+        }
     }
 }
 

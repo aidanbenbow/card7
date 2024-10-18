@@ -35,7 +35,7 @@ this.cols = this.game.level.cols
         this.id1 = null
 
         this.num = []
-        console.log(this.matrix) 
+        console.log(this.faces) 
         while (this.cardsSelected.length<=(this.noCards-1)) {
             let rn2 = Math.floor(Math.random() * this.matrix.length)
           
@@ -72,8 +72,7 @@ draw(context, context2){
 }
 update(time){
     for (const card of this.cards) {
-        card.update(time)
-        
+        card.update(time)      
     }
 }
 

@@ -4,23 +4,24 @@ import { gameState } from "../states/gameState.js"
 
 
 export class Cheese{
-    constructor(game,pos,face, id){
-        this.game = game
+    constructor(dim,face, id){
+        
         this.image = document.querySelector(`#cards`)
         this.id = id
+        this.scale = 1
         
         this.spriteWidth = 100
         this.spriteHeight = 100
         this.frameX = face[0]
         this.frameY = face[1]
         
-        this.width = this.game.level.cardWidth
-        this.height = this.game.level.cardHeight
+        this.width = dim[0]
+        this.height = dim[1]
 
         this.x = this.width/2
         this.y = this.height/2
         
-      this.gridPos = [pos[0],pos[1]]
+      this.gridPos = [0,0]
 
         this.back = true
         this.clicked = false
@@ -49,14 +50,16 @@ export class Cheese{
     draw(context){
         
         if(this.back){
+         
             context.drawImage(this.image,
                 800,
                 100*bk,
                 this.spriteWidth,this.spriteHeight, 
                 this.x+ this.width*this.gridPos[0],
                 this.y+ this.height*this.gridPos[1], 
-                this.width ,
+                this.width  ,
                 this.height ) 
+               
         } else{
             context.drawImage(this.image,
                 this.spriteWidth*this.frameX,
@@ -70,8 +73,15 @@ export class Cheese{
        // if(this.clicked) this.smoke.draw(context)
             }
         
-            update(time){
-              //  if(this.clicked) this.smoke.update(time)
+            update(time,context){
+                if(this.clicked){   
+                    this.scale=1.05  
+                    this.smoke.update(time)
+                } else {
+                    this.scale=1  
+                }
+                
+                    
             }
 
 }
